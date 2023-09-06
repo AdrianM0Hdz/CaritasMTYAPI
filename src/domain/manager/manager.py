@@ -2,6 +2,8 @@ from typing import List
 from hashlib import sha512
 from uuid import uuid1
 
+from ..ticket import Ticket 
+from ..collector import Collector
 
 class Manager:
     def __init__(
@@ -10,8 +12,8 @@ class Manager:
         username: str,
         password: str,
         fullname: str,
-        collectors: List[str],
-        tickets: List[str],
+        collectors: List[Collector],
+        tickets: List[Ticket],
     ):
         assert isinstance(id, str)
         assert isinstance(username, str)
@@ -23,9 +25,9 @@ class Manager:
         self.__id = id
         self.__username = username
         self.__password = password
-        self.fullname = fullname
-        self.collectors = collectors
-        self.tickets = tickets
+        self.__fullname = fullname
+        self.__collectors = collectors
+        self.__tickets = tickets
 
     @property
     def id(self) -> str:
@@ -38,6 +40,18 @@ class Manager:
     @property
     def password(self) -> str:
         return self.__password
+
+    @property 
+    def fullname(self) -> str:
+        return self.__fullname
+    
+    @property 
+    def collectors(self) -> List[Collector]:
+        return self.__collectors 
+
+    @property 
+    def tickets(self) -> List[Ticket]:
+        return self.__tickets
 
     @classmethod
     def create_new(cls, username: str, password: str, fullname: str):
