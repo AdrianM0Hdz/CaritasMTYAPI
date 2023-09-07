@@ -11,7 +11,7 @@ manager_blueprint = Blueprint('manager_blueprint', __name__)
 @manager_blueprint.route("/<string:id>", methods=["GET"])
 def get_manager_by_id_handle(id: str):
     assert isinstance(id, str)
-    manager: managerData = get_manager_by_id(id=id)
+    manager: ManagerData = get_manager_by_id(id=id)
     manager_json: dict = serialize_manager_to_json(manager)
     return jsonify(**manager_json)
 
@@ -33,7 +33,7 @@ def login_manager_handle():
         ), 400
 
     try:
-        manager: managerData  = login_manager(username=username, password=password)
+        manager: ManagerData  = login_manager(username=username, password=password)
         manager_json = serialize_manager_to_json(manager)
         return jsonify(**manager_json)
     except BaseException as inst:
