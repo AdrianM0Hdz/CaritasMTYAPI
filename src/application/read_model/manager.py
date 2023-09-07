@@ -10,5 +10,6 @@ class ManagerData:
     id: str
     username: str
     password: str
+    fullname: str
     tickets: List[TicketData]
     collectors: List[CollectorData]
