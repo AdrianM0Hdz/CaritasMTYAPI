@@ -38,4 +38,3 @@ def login_collector_handle():
         return jsonify(**collector_json)
     except BaseException as inst:
         return jsonify(msg=str(inst)), 400
-        
