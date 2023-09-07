@@ -13,5 +13,5 @@ from src.infrastructure.persistence.queries.collector.get_collectors_by_manager_
 from src.infrastructure.persistence.queries.manager.get_manager_by_id import get_manager_by_id
 #from src.infrastructure.persistence.queries.manager.get_manager_by_username import get
 
-#print(get_collectors_by_manager_id(manager_id="1"))
-#print(get_manager_by_id(id="1"))
+# print(get_collectors_by_manager_id(manager_id="1"))
+print(get_manager_by_id(id="1"))
