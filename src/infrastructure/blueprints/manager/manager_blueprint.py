@@ -37,5 +37,5 @@ def login_manager_handle():
         manager_json = serialize_manager_to_json(manager)
         return jsonify(**manager_json)
     except BaseException as inst:
-        return jsonify(msg=str(inst))
+        return jsonify(msg=str(inst)), 400
         
