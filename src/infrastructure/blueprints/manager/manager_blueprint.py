@@ -1,22 +1,22 @@
 from flask import Blueprint, request, jsonify
 
-from src.application.read_model.collector import CollectorData
-from src.application.queries.collector import login_collector
+from src.application.read_model.manager import ManagerData
+from src.application.queries.manager import login_manager
 
-from src.infrastructure.persistence.queries.collector.get_collector_by_id import get_collector_by_id
-from src.infrastructure.blueprints.serializers.collector import serialize_collector_to_json
+from src.infrastructure.persistence.queries.manager.get_manager_by_id import get_manager_by_id
+from src.infrastructure.blueprints.serializers.manager import serialize_manager_to_json
 
-collector_blueprint = Blueprint('collector_blueprint', __name__)
+manager_blueprint = Blueprint('manager_blueprint', __name__)
 
-@collector_blueprint.route("/<string:id>", methods=["GET"])
-def get_collector_by_id_handle(id: str):
+@manager_blueprint.route("/<string:id>", methods=["GET"])
+def get_manager_by_id_handle(id: str):
     assert isinstance(id, str)
-    collector: CollectorData = get_collector_by_id(id=id)
-    collector_json: dict = serialize_collector_to_json(collector)
-    return jsonify(**collector_json)
+    manager: managerData = get_manager_by_id(id=id)
+    manager_json: dict = serialize_manager_to_json(manager)
+    return jsonify(**manager_json)
 
-@collector_blueprint.route("/login", methods=["GET"])
-def login_collector_handle():
+@manager_blueprint.route("/login", methods=["GET"])
+def login_manager_handle():
     data = request.get_json()
     if not data:
         return jsonify(
@@ -33,9 +33,9 @@ def login_collector_handle():
         ), 400
 
     try:
-        collector: CollectorData  = login_collector(username=username, password=password)
-        collector_json = serialize_collector_to_json(collector)
-        return jsonify(**collector_json)
+        manager: managerData  = login_manager(username=username, password=password)
+        manager_json = serialize_manager_to_json(manager)
+        return jsonify(**manager_json)
     except BaseException as inst:
         return jsonify(msg=str(inst))
         
