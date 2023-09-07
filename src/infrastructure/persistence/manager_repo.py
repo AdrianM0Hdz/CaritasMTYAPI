@@ -30,7 +30,7 @@ from src.domain.collector import Collector
 from src.domain.ticket import Ticket
 
 class ManagerRepository:
-    def __init__(self):
+    def __init__(self):     
         connectionstring = f'DRIVER={{ODBC Driver 17 for SQL Server}}; \
                              SERVER={os.environ["SERVER"]}; \
                              DATABASE={os.environ["DATABASE"]}; \
@@ -41,6 +41,7 @@ class ManagerRepository:
     
     def insert(self, item: Manager):
         cursor = self.connection.cursor()
+        
         query = f""" INSERT INTO Manager(ID, Username, Password, Fullname) 
                      VALUES ('{item.id}', '{item.username}', '{item.password}', '{item.fullname}');"""
         

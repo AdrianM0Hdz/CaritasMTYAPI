@@ -1,5 +1,5 @@
 import pyodbc
-
+from pyodbc import Row
 print(pyodbc.drivers())
 
 SERVER = '10.14.255.68'
@@ -18,5 +18,5 @@ query = """
 cursor = conn.cursor() 
 cursor.execute(query)
 for record in cursor.fetchall():
-    print(record)
+    print(record[0])
 
