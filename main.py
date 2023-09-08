@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 load_dotenv(override=True)
 
 from uuid import uuid1
+from datetime import date
 
 from src.domain.ticket import Ticket
 from src.domain.ticket.ticket_state import TicketState
@@ -20,8 +21,7 @@ t = Ticket(id=str(uuid1()),
            manager_id="1", 
            collector_id="1", 
            state=TicketState.PENDING, 
-           date="2023-01-01", 
+           date=date(year=1000, month=12, day=12), 
            collector_comments="dummty")
-print(
-ticket_repo.get("250479a4-4e62-11ee-9f3e-04ea56b5cbe1")
-)
+
+ticket_repo.insert(t)
