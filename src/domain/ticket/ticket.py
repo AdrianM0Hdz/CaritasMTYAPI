@@ -4,7 +4,6 @@ from typing import List
 
 from .ticket_state import TicketState
 
-
 @dataclass
 class Ticket:
     id: str

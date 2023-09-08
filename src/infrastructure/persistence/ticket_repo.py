@@ -31,7 +31,7 @@ class TicketRepository:
                              '{item.house_phone_number}', 
                              '{item.cellphone}',
                              '{item.state.value}',
-                             '{item.date}',
+                             '{str(item.date)}',
                              '{item.collector_comments}');"""
         execute_command(command)
 
