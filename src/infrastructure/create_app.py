@@ -10,4 +10,7 @@ def create_app() -> Flask:
     from .blueprints.collector.collector_blueprint import collector_blueprint
     app.register_blueprint(collector_blueprint, url_prefix="/collector")
     
+    from .blueprints.manager.manager_blueprint import manager_blueprint
+    app.register_blueprint(manager_blueprint, url_prefix="/manager")
+
     return app
