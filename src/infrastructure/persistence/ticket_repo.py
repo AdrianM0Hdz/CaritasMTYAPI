@@ -35,7 +35,6 @@ class TicketRepository:
                              '{item.collector_comments}');"""
         execute_command(command)
 
-
     def get(self, id: str) -> Ticket:
         query = f"SELECT * FROM Ticket WHERE ID='{id}'"
         raw_data = execute_query(query)

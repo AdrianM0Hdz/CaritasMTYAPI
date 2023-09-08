@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import date
 from typing import List
 
 from .ticket_state import TicketState
@@ -15,5 +16,5 @@ class Ticket:
     manager_id: str
     collector_id: str
     state: TicketState
-    date: str
+    date: date
     collector_comments: str
