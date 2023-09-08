@@ -9,7 +9,7 @@ from src.domain.ticket.ticket_state import TicketState
 
 class TicketRepository:
 
-    def insert(self, item: Ticket):    
+    def insert(self, item: Ticket) -> str:    
         command=f""" INSERT INTO 
                      Ticket (ID, 
                              ManagerID, 
@@ -34,6 +34,7 @@ class TicketRepository:
                              '{str(item.date)}',
                              '{item.collector_comments}');"""
         execute_command(command)
+        return item.id
 
     def get(self, id: str) -> Ticket:
         query = f"SELECT * FROM Ticket WHERE ID='{id}'"
