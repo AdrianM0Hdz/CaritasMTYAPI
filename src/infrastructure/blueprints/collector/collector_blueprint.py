@@ -15,7 +15,7 @@ def get_collector_by_id_handle(id: str):
     collector_json: dict = serialize_collector_to_json(collector)
     return jsonify(**collector_json)
 
-@collector_blueprint.route("/login", methods=["GET"])
+@collector_blueprint.route("/login", methods=["POST"])
 def login_collector_handle():
     data = request.get_json()
     if not data:

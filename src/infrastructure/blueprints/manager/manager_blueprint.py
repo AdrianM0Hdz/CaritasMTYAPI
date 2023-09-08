@@ -15,7 +15,7 @@ def get_manager_by_id_handle(id: str):
     manager_json: dict = serialize_manager_to_json(manager)
     return jsonify(**manager_json)
 
-@manager_blueprint.route("/login", methods=["GET"])
+@manager_blueprint.route("/login", methods=["POST"])
 def login_manager_handle():
     data = request.get_json()
     if not data:
