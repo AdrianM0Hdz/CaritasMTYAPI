@@ -13,4 +13,7 @@ def create_app() -> Flask:
     from .blueprints.manager.manager_blueprint import manager_blueprint
     app.register_blueprint(manager_blueprint, url_prefix="/manager")
 
+    from .blueprints.ticket.ticket_blueprint import ticket_blueprint
+    app.register_blueprint(ticket_blueprint, url_prefix='/ticket')
+
     return app

@@ -11,6 +11,6 @@ def serialize_ticket_to_json(ticket: TicketData) -> dict:
         "managerId": ticket.manager_id,
         "collectorId": ticket.collector_id,
         "state": ticket.state.value,
-        "date": ticket.date,
+        "date": str(ticket.date),
         "collectorComments": ticket.collector_comments
     }

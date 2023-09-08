@@ -19,9 +19,11 @@ def get_collector_by_id_handle(id: str):
 def login_collector_handle():
     data = request.get_json()
     if not data:
+        print("no json body")
         return jsonify(
             msg="just must give username and password"
         ), 400
+    
     username: str
     password: str 
     try:
@@ -31,7 +33,7 @@ def login_collector_handle():
         return jsonify(
             msg="username and password parameters must be given"
         ), 400
-
+    print("passed check")
     try:
         collector: CollectorData  = login_collector(username=username, password=password)
         collector_json = serialize_collector_to_json(collector)
