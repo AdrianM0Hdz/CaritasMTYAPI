@@ -35,6 +35,6 @@ def login_collector_handle():
     try:
         collector: CollectorData  = login_collector(username=username, password=password)
         collector_json = serialize_collector_to_json(collector)
-        return jsonify(**collector_json)
+        return jsonify(id=collector_json["id"])
     except BaseException as inst:
         return jsonify(msg=str(inst)), 400

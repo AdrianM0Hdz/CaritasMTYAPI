@@ -1,22 +1,27 @@
-import pyodbc
-from pyodbc import Row
-print(pyodbc.drivers())
+import os
+from dotenv import load_dotenv
+load_dotenv(override=True)
 
-SERVER = '10.14.255.68'
-DATABASE = 'DB_INGRESOS'
-USERNAME = 'SA'
-PASSWORD = 'Shakira123.'
+from uuid import uuid1
 
-connectionString = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={SERVER};DATABASE={DATABASE};UID={USERNAME};PWD={PASSWORD}'
+from src.domain.ticket import Ticket
+from src.domain.ticket.ticket_state import TicketState
 
-conn = pyodbc.connect(connectionString)
+from src.infrastructure.persistence.ticket_repo import TicketRepository
 
-query = """
-    SELECT * FROM Manager;
-"""
+ticket_repo = TicketRepository()
 
-cursor = conn.cursor() 
-cursor.execute(query)
-for record in cursor.fetchall():
-    print(record[0])
-
+t = Ticket(id=str(uuid1()), 
+           housing_reference="dummy", 
+           receipt_comments="dummy", 
+           reprogramation_comments="dummy", 
+           house_phone_number="dummy", 
+           cellphone="dummy", 
+           manager_id="1", 
+           collector_id="1", 
+           state=TicketState.PENDING, 
+           date="2023-01-01", 
+           collector_comments="dummty")
+print(
+ticket_repo.get("250479a4-4e62-11ee-9f3e-04ea56b5cbe1")
+)
