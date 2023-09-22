@@ -7,7 +7,7 @@ from src.application.read_model.ticket import TicketData
 
 from src.infrastructure.persistence.queries.serializers.ticket.deserialize_ticket import deserialize_ticket
 
-def get_tickets_by_manager_id(manager_id: str) -> Tuple[TicketData]:
+def get_tickets_by_manager_id(manager_id: int) -> Tuple[TicketData]:
     connectionstring = f'DRIVER={{ODBC Driver 17 for SQL Server}}; \
                              SERVER={os.environ["SERVER"]}; \
                              DATABASE={os.environ["DATABASE"]}; \

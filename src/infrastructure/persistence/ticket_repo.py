@@ -11,7 +11,7 @@ class TicketRepository:
 
     def insert(self, item: Ticket) -> str:    
         command=f""" INSERT INTO 
-                     Ticket (ID, 
+                     Ticket (UUID, 
                              ManagerID, 
                              CollectorID, 
                              HousingReference, 
@@ -22,7 +22,7 @@ class TicketRepository:
                              State, 
                              TicketDate, 
                              CollectorComments) 
-                     VALUES ('{item.id}', 
+                     VALUES ('{item.uuid}', 
                              '{item.manager_id}', 
                              '{item.collector_id}', 
                              '{item.housing_reference}', 
@@ -36,7 +36,7 @@ class TicketRepository:
         execute_command(command)
         return item.id
 
-    def get(self, id: str) -> Ticket:
+    def get(self, id: int) -> Ticket:
         query = f"SELECT * FROM Ticket WHERE ID='{id}'"
         raw_data = execute_query(query)
         if len(raw_data) > 1:
@@ -46,16 +46,19 @@ class TicketRepository:
         item_row = raw_data[0]
         return Ticket(
             id=item_row[0],
-            manager_id=item_row[1],
-            collector_id=item_row[2],
-            housing_reference=item_row[3],
-            receipt_comments=item_row[4],
-            reprogramation_comments=item_row[5],
-            house_phone_number=item_row[6],
-            cellphone=item_row[7],
-            state=TicketState(item_row[8]),
-            date=item_row[9],
-            collector_comments=item_row[10]
+            uuid=item_row[1],
+            manager_id=item_row[2],
+            collector_id=item_row[3],
+            housing_reference=item_row[4],
+            receipt_comments=item_row[5],
+            reprogramation_comments=item_row[6],
+            house_phone_number=item_row[7],
+            cellphone=item_row[8],
+            state=TicketState(item_row[9]),
+            date=item_row[10],
+            collector_comments=item_row[11],
+            donation_amount=item_row[12],
+            donor_name=item_row[13]
         )
 
     def commit(self, item: Ticket):

@@ -7,8 +7,10 @@ from .ticket import TicketData
 
 @dataclass(frozen=True)
 class ManagerData:
-    id: str
+    id: int
+    uuid: str
     username: str
     password: str
+    fullname: str
     tickets: List[TicketData]
     collectors: List[CollectorData]

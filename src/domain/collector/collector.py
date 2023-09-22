@@ -6,14 +6,16 @@ from hashlib import sha512
 class Collector:
     def __init__(
         self,
-        id: str,
+        id: int,
+        uuid: str,
         username: str,
         password: str,
         fullname: str,
         manager_id: str,
         tickets: List[str],
     ):
-        assert isinstance(id, str)
+        assert isinstance(id, int)
+        assert isinstance(uuid, str)
         assert isinstance(username, str)
         assert isinstance(password, str)
         assert isinstance(fullname, str)
@@ -21,6 +23,7 @@ class Collector:
         assert isinstance(tickets, list)
 
         self.id = id
+        self.uuid = uuid
         self.username = username
         self.password = password
         self.fullname = fullname
@@ -30,13 +33,14 @@ class Collector:
     @classmethod
     def create_new(
         cls,
+        uuid: str,
         username: str,
         password: str,
         fullname: str,
         manager_id: str,
     ):
         return cls(
-            id=str(uuid1()),
+            uuid=str(uuid1()),
             username=username,
             password=sha512(bytes(password, "utf-8")).hexdigest(),
             fullname=fullname,

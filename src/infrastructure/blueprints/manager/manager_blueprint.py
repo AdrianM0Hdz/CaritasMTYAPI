@@ -9,7 +9,7 @@ from src.infrastructure.blueprints.serializers.manager import serialize_manager_
 manager_blueprint = Blueprint('manager_blueprint', __name__)
 
 @manager_blueprint.route("/<string:id>", methods=["GET"])
-def get_manager_by_id_handle(id: str):
+def get_manager_by_id_handle(id: int):
     assert isinstance(id, str)
     manager: ManagerData = get_manager_by_id(id=id)
     manager_json: dict = serialize_manager_to_json(manager)

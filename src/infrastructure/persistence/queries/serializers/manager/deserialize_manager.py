@@ -9,8 +9,9 @@ from src.application.read_model.ticket import TicketData
 def deserialize_manager(manager_raw_data, tickets: List[TicketData], collectors: List[CollectorData]) -> ManagerData:
     return ManagerData(
         id=manager_raw_data[0],
-        username=manager_raw_data[1],
-        password=manager_raw_data[2],
+        uuid=manager_raw_data[1],
+        username=manager_raw_data[2],
+        password=manager_raw_data[3],
         tickets=tickets,
         collectors=collectors
     )

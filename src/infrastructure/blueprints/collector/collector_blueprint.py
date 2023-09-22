@@ -9,8 +9,8 @@ from src.infrastructure.blueprints.serializers.collector import serialize_collec
 collector_blueprint = Blueprint('collector_blueprint', __name__)
 
 @collector_blueprint.route("/<string:id>", methods=["GET"])
-def get_collector_by_id_handle(id: str):
-    assert isinstance(id, str)
+def get_collector_by_id_handle(id: int):
+    assert isinstance(id, int)
     collector: CollectorData = get_collector_by_id(id=id)
     collector_json: dict = serialize_collector_to_json(collector)
     return jsonify(**collector_json)

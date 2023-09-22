@@ -7,7 +7,8 @@ from .ticket_state import TicketState
 
 @dataclass
 class Ticket:
-    id: str
+    id: int
+    uuid: str
     housing_reference: str
     receipt_comments: str
     reprogramation_comments: str
@@ -18,10 +19,12 @@ class Ticket:
     state: TicketState
     date: datetime.date
     collector_comments: str
+    donation_amount: int
+    donor_name: str
 
     @classmethod
     def create_new(cls, 
-                   id: str,
+                   uuid: str,
                    housing_reference: str, 
                    receipt_comments: str, 
                    reprogramation_comments: str, 
@@ -30,9 +33,11 @@ class Ticket:
                    manager_id: str, 
                    collector_id: str,
                    date: datetime.date, 
-                   collector_comments: str): 
+                   collector_comments: str,
+                   donation_amount: int,
+                   donor_name: str): 
         return cls(
-            id=id,
+            uuid=uuid,
             housing_reference=housing_reference, 
             receipt_comments=receipt_comments, 
             reprogramation_comments=reprogramation_comments,
@@ -42,5 +47,7 @@ class Ticket:
             collector_id=collector_id, 
             state=TicketState.PENDING, 
             date=date, 
-            collector_comments=collector_comments
+            collector_comments=collector_comments,
+            donation_amount=donation_amount,
+            donor_name=donor_name
         )

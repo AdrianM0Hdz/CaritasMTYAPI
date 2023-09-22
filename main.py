@@ -15,7 +15,7 @@ from src.infrastructure.persistence.ticket_repo import TicketRepository
 ticket_repo = TicketRepository()
 
 tid = create_ticket(
-    id=str(uuid1()), 
+    #id=str(uuid1()), 
     housing_reference="dummy", 
     receipt_comments="dummy", 
     reprogramation_comments="dummy", 

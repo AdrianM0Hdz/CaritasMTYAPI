@@ -2,7 +2,7 @@ from src.application.read_model.ticket import TicketData
 
 def serialize_ticket_to_json(ticket: TicketData) -> dict:
     return {
-        "id": ticket.id,
+        "uuid": ticket.uuid,
         "housingReference": ticket.housing_reference,
         "receiptComments": ticket.receipt_comments,
         "reprogramationComments": ticket.reprogramation_comments,
@@ -12,5 +12,7 @@ def serialize_ticket_to_json(ticket: TicketData) -> dict:
         "collectorId": ticket.collector_id,
         "state": ticket.state.value,
         "date": str(ticket.date),
-        "collectorComments": ticket.collector_comments
+        "collectorComments": ticket.collector_comments,
+        "donationAmount": ticket.donation_amount,
+        "donorName": ticket.donor_name
     }

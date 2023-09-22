@@ -42,8 +42,8 @@ class ManagerRepository:
     def insert(self, item: Manager):
         cursor = self.connection.cursor()
         
-        query = f""" INSERT INTO Manager(ID, Username, Password, Fullname) 
-                     VALUES ('{item.id}', '{item.username}', '{item.password}', '{item.fullname}');"""
+        query = f""" INSERT INTO Manager(UUID, Username, Password, Fullname) 
+                     VALUES ('{item.uuid}', '{item.username}', '{item.password}', '{item.fullname}');"""
         
         cursor.execute(query)
         self.connection.commit()

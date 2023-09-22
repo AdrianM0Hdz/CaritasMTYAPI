@@ -4,16 +4,18 @@ from src.domain.ticket import Ticket
 from src.infrastructure.persistence.ticket_repo import TicketRepository
 
 def create_ticket(
-        id: str,
+        uuid: str,
         housing_reference: str, 
         receipt_comments: str, 
         reprogramation_comments: str, 
         house_phone_number: str, 
         cellphone: str, 
-        manager_id: str, 
-        collector_id: str,
+        manager_id: int, 
+        collector_id: int,
         date: str, 
-        collector_comments: str 
+        collector_comments: str ,
+        donation_amount: int,
+        donor_name: str
 ) -> str:
     """ Creates a ticket in the database and returns the id of the created ticket
     """
@@ -25,7 +27,7 @@ def create_ticket(
     )
     
     ticket = Ticket.create_new(
-        id=id,
+        uuid=uuid,
         housing_reference=housing_reference, 
         receipt_comments=receipt_comments, 
         reprogramation_comments=reprogramation_comments, 
@@ -34,7 +36,9 @@ def create_ticket(
         manager_id=manager_id, 
         collector_id=collector_id,
         date=date_obj, 
-        collector_comments=collector_comments
+        collector_comments=collector_comments,
+        donation_amount=donation_amount,
+        donor_name=donor_name
     )
     
     ticket_repo = TicketRepository() 

@@ -5,7 +5,8 @@ from src.domain.ticket.ticket_state import TicketState
 
 @dataclass(frozen=True)
 class TicketData:
-    id: str
+    id: int
+    uuid: str
     housing_reference: str
     receipt_comments: str
     reprogramation_comments: str
@@ -16,3 +17,5 @@ class TicketData:
     state: TicketState
     date: str
     collector_comments: str
+    donation_amount: int
+    donor_name: str

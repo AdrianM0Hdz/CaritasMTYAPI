@@ -7,7 +7,7 @@ from src.application.read_model.collector import CollectorData
 from src.infrastructure.persistence.queries.ticket.get_tickets_by_collector_id import get_tickets_by_collector_id
 from src.infrastructure.persistence.queries.serializers.collector.deserialize_collector import deserialize_collector
 
-def get_collector_by_id(id: str) -> CollectorData:
+def get_collector_by_id(id: int) -> CollectorData:
     connectionstring = f'DRIVER={{ODBC Driver 17 for SQL Server}}; \
                              SERVER={os.environ["SERVER"]}; \
                              DATABASE={os.environ["DATABASE"]}; \

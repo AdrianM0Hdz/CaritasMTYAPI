@@ -11,7 +11,7 @@ from src.infrastructure.blueprints.serializers.ticket import serialize_ticket_to
 ticket_blueprint = Blueprint("ticket_blueprint", __name__)
 
 @ticket_blueprint.route("/<string:id>", methods=["GET"])
-def get_ticket_by_id_handler(id: str):
+def get_ticket_by_id_handler(uuid: str):
     return jsonify()
 
 @ticket_blueprint.route("/collector-tickets/<string:collector_id>", methods=["GET"])

@@ -8,14 +8,16 @@ from ..collector import Collector
 class Manager:
     def __init__(
         self,
-        id: str,
+        id: int,
+        uuid: str,
         username: str,
         password: str,
         fullname: str,
         collectors: List[Collector],
         tickets: List[Ticket],
     ):
-        assert isinstance(id, str)
+        assert isinstance(id, int)
+        assert isinstance(uuid, str)
         assert isinstance(username, str)
         assert isinstance(password, str)
         assert isinstance(fullname, str)
@@ -23,6 +25,7 @@ class Manager:
         assert isinstance(tickets, list)
 
         self.__id = id
+        self.__uuid = uuid
         self.__username = username
         self.__password = password
         self.__fullname = fullname
@@ -30,8 +33,12 @@ class Manager:
         self.__tickets = tickets
 
     @property
-    def id(self) -> str:
+    def id(self) -> int:
         return self.__id
+
+    @property
+    def uuid(self) -> str:
+        return self.__uuid
 
     @property
     def username(self) -> str:
@@ -56,7 +63,7 @@ class Manager:
     @classmethod
     def create_new(cls, username: str, password: str, fullname: str):
         return cls(
-            id=str(uuid1()),
+            uuid=str(uuid1()),
             username=username,
             password=sha512(bytes(password, "utf-8")).hexdigest(),
             fullname=fullname,

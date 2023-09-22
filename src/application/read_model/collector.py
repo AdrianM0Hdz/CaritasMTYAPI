@@ -6,7 +6,8 @@ from .ticket import TicketData
 
 @dataclass(frozen=True)
 class CollectorData:
-    id: str
+    id: int
+    uuid: str
     username: str
     password: str
     fullname: str

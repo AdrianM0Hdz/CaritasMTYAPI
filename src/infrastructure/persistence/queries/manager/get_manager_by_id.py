@@ -9,7 +9,7 @@ from src.infrastructure.persistence.queries.collector.get_collectors_by_manager_
 
 from src.infrastructure.persistence.queries.serializers.manager.deserialize_manager import deserialize_manager
 
-def get_manager_by_id(id: str) -> ManagerData:
+def get_manager_by_id(id: int) -> ManagerData:
     connectionstring = f'DRIVER={{ODBC Driver 17 for SQL Server}}; \
                              SERVER={os.environ["SERVER"]}; \
                              DATABASE={os.environ["DATABASE"]}; \

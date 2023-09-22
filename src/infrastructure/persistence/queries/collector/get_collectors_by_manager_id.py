@@ -7,7 +7,7 @@ from src.application.read_model.collector import CollectorData
 
 from src.infrastructure.persistence.queries.collector.get_collector_by_id import get_collector_by_id 
 
-def get_collectors_by_manager_id(manager_id: str) -> Tuple[CollectorData, ...]:
+def get_collectors_by_manager_id(manager_id: int) -> Tuple[CollectorData, ...]:
     connectionstring = f'DRIVER={{ODBC Driver 17 for SQL Server}}; \
                              SERVER={os.environ["SERVER"]}; \
                              DATABASE={os.environ["DATABASE"]}; \
