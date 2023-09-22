@@ -16,4 +16,7 @@ def create_app() -> Flask:
     from .blueprints.ticket.ticket_blueprint import ticket_blueprint
     app.register_blueprint(ticket_blueprint, url_prefix='/ticket')
 
+    from .blueprints.general.general_blueprint import general_blueprint
+    app.register_blueprint(general_blueprint, url_prefix='/general')
+
     return app
