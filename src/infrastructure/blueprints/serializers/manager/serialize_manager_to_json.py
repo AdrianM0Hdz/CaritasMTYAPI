@@ -5,6 +5,7 @@ from ..ticket import serialize_ticket_to_json
 
 def serialize_manager_to_json(manager: ManagerData) -> dict:
     return {
+        "id": manager.id,
         "uuid": manager.uuid,
         "username": manager.username,
         "password": manager.password,

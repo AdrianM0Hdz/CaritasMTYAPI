@@ -12,6 +12,7 @@ def deserialize_manager(manager_raw_data, tickets: List[TicketData], collectors:
         uuid=manager_raw_data[1],
         username=manager_raw_data[2],
         password=manager_raw_data[3],
+        fullname=manager_raw_data[4],
         tickets=tickets,
         collectors=collectors
     )

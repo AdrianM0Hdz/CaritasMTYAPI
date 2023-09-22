@@ -10,7 +10,7 @@ from src.infrastructure.persistence.queries.collector.get_collectors_by_manager_
 from src.infrastructure.persistence.queries.serializers.manager.deserialize_manager import deserialize_manager
 
 def get_manager_by_username(username: str) -> ManagerData:
-    connectionstring = f'DRIVER={{ODBC Driver 17 for SQL Server}}; \
+    connectionstring = f'DRIVER={{SQL Server}}; \
                              SERVER={os.environ["SERVER"]}; \
                              DATABASE={os.environ["DATABASE"]}; \
                              UID={os.environ["USERNAME"]}; \
