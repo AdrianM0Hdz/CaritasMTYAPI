@@ -19,7 +19,10 @@ def get_ticket_by_id_handler(uuid: str):
 def get_tickets_by_collector_id_handler(collector_id: int):
     tickets = get_tickets_by_collector_id(collector_id=collector_id)
     ticket_json = list(map(serialize_ticket_to_json, tickets)) 
-    return Response(response=json.dumps(ticket_json), 
+    respObject = {
+        "tickets": ticket_json
+    }
+    return Response(response=json.dumps(respObject), 
                     status=200, 
                     mimetype="application/json")
 
@@ -27,7 +30,10 @@ def get_tickets_by_collector_id_handler(collector_id: int):
 def get_tickets_by_manager_id_handler(manager_id: int):
     tickets = get_tickets_by_manager_id(manager_id=manager_id)
     ticket_json = list(map(serialize_ticket_to_json, tickets)) 
-    return Response(response=json.dumps(ticket_json), 
+    respObject = {
+        "tickets": ticket_json
+    }
+    return Response(response=json.dumps(respObject), 
                     status=200, 
                     mimetype="application/json")
 
