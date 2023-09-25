@@ -4,7 +4,7 @@ import pyodbc
 
 def execute_query(query: str) :
 
-    connectionstring = f'DRIVER={{ODBC Driver 17 for SQL Server}}; \
+    connectionstring = f'DRIVER={os.environ["SQL_SERVER_DRIVER"]}; \
                                 SERVER={os.environ["SERVER"]}; \
                                 DATABASE={os.environ["DATABASE"]}; \
                                 UID={os.environ["USERNAME"]}; \

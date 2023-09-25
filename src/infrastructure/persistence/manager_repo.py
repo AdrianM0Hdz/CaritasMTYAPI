@@ -8,7 +8,7 @@ DATABASE = 'DB_INGRESOS'
 USERNAME = 'SA'
 PASSWORD = 'Shakira123.'
 
-connectionString = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={SERVER};DATABASE={DATABASE};UID={USERNAME};PWD={PASSWORD}'
+connectionString = f'DRIVER={os.environ["SQL_SERVER_DRIVER"]};SERVER={SERVER};DATABASE={DATABASE};UID={USERNAME};PWD={PASSWORD}'
 
 conn = pyodbc.connect(connectionString)
 
@@ -31,7 +31,7 @@ from src.domain.ticket import Ticket
 
 class ManagerRepository:
     def __init__(self):     
-        connectionstring = f'DRIVER={{ODBC Driver 17 for SQL Server}}; \
+        connectionstring = f'DRIVER={os.environ["SQL_SERVER_DRIVER"]}; \
                              SERVER={os.environ["SERVER"]}; \
                              DATABASE={os.environ["DATABASE"]}; \
                              UID={os.environ["USERNAME"]}; \
