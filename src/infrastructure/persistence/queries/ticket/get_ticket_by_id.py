@@ -7,7 +7,7 @@ from src.application.read_model.ticket import TicketData, TicketState
 from src.infrastructure.persistence.queries.serializers.ticket.deserialize_ticket import deserialize_ticket
 
 def get_ticket_by_id(id: int) -> TicketData:
-    connectionstring = f'DRIVER={{ODBC Driver 17 for SQL Server}}; \
+    connectionstring = f'DRIVER={os.environ["SQL_SERVER_DRIVER"]}; \
                              SERVER={os.environ["SERVER"]}; \
                              DATABASE={os.environ["DATABASE"]}; \
                              UID={os.environ["USERNAME"]}; \
