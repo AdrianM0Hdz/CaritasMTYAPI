@@ -7,7 +7,7 @@ def serialize_collector_to_json(collector: CollectorData) -> dict:
         "id": collector.id,
         "uuid": collector.uuid,
         "username": collector.username,
-        "password": collector.password,
+        #"password": collector.password, # por seguridad
         "fullname": collector.fullname,
         "managerId": collector.manager_id,
         "tickets": list(map(serialize_ticket_to_json, collector.tickets))
