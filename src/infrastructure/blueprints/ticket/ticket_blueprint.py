@@ -49,6 +49,11 @@ def change_state_handler():
             msg="no request body given"
         ), 400
     
+    if ("ticket_id" not in data) or ("new_state" not in data):
+        return jsonify(
+            msg="ticket_id and new_state must be given"
+        ), 400
+
     try:
         change_status(ticket_id=data["ticket_id"], new_state=TicketState(data["new_state"]))
         return jsonify(
@@ -67,6 +72,11 @@ def change_collector_comments_handler():
             msg="no request body given"
         ), 400
     
+    if ("ticket_id" not in data) or ("collector_comments" not in data):
+        return jsonify(
+            msg="ticket_id and collector_comments must be given"
+        ), 400
+
     try:
         change_collector_comments(ticket_id=data["ticket_id"], collector_comments=data["collector_comments"])
         return jsonify(
