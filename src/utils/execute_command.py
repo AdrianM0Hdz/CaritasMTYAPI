@@ -12,6 +12,6 @@ def execute_command(query: str) :
     conn = pyodbc.connect(connectionstring)
     cursor = conn.cursor()
     cursor.execute(query)
-
+    data = cursor.fetchall()
     conn.commit()
-    return
+    return data
