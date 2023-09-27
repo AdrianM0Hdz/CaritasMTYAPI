@@ -41,8 +41,8 @@ def get_tickets_by_manager_id_handler(manager_id: int):
                     mimetype="application/json")
 
 
-@ticket_blueprint.route("/change_state/<int:ticket_id>", methods=["POST"])
-def change_state_handler(ticket_id: int):
+@ticket_blueprint.route("/change_state", methods=["POST"])
+def change_state_handler():
     data = request.get_json()
     if not data:
         return jsonify(
@@ -50,7 +50,7 @@ def change_state_handler(ticket_id: int):
         ), 400
     
     try:
-        change_status(ticket_id=ticket_id, new_state=TicketState(data["new_state"]))
+        change_status(ticket_id=data["ticket_id"], new_state=TicketState(data["new_state"]))
         return jsonify(
             msg="state changed"
         )
@@ -59,8 +59,8 @@ def change_state_handler(ticket_id: int):
             msg=str(inst)
         )
 
-@ticket_blueprint.route("/change_collector_comments/<int:ticket_id>", methods=["POST"])
-def change_collector_comments_handler(ticket_id: int):
+@ticket_blueprint.route("/change_collector_comments", methods=["POST"])
+def change_collector_comments_handler():
     data = request.get_json()
     if not data:
         return jsonify(
@@ -68,7 +68,7 @@ def change_collector_comments_handler(ticket_id: int):
         ), 400
     
     try:
-        change_collector_comments(ticket_id=ticket_id, collector_comments=data["collector_comments"])
+        change_collector_comments(ticket_id=data["ticket_id"], collector_comments=data["collector_comments"])
         return jsonify(
             msg="comments changed"
         )
