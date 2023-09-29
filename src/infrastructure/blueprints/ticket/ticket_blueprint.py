@@ -62,7 +62,7 @@ def change_state_handler():
     except BaseException as inst:
         return jsonify(
             msg=str(inst)
-        )
+        ), 500
 
 @ticket_blueprint.route("/change_collector_comments", methods=["POST"])
 def change_collector_comments_handler():

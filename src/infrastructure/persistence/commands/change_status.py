@@ -8,5 +8,5 @@ def change_status(ticket_id: int, new_state: TicketState) -> None:
     execute_command(f"""
                     UPDATE Ticket
                     SET State = '{new_state.value}'
-                    WHERE ID = {ticket_id}
+                    WHERE ID = {ticket_id};
                     """)
