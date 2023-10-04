@@ -4,6 +4,9 @@ load_dotenv(override=True)
 
 from src.infrastructure.create_app import create_app
 
+import pyodbc 
+print(pyodbc.drivers())
+
 app = create_app()
 
 # TODO: this is provitional and for development
