@@ -1,3 +1,5 @@
+IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'DB_INGRESOS')
+BEGIN
 CREATE DATABASE DB_INGRESOS;
 GO
 
@@ -59,3 +61,4 @@ GO
 	--  (N'3',1,2,N'Casa Amarilla',N'Tocar fuerte',N'',N'6731479311',N'6741479311',N'PENDING','2016-10-25',N'',1000,N'donante sada'),
 	--  (N'4',1,2,N'Casa Azul',N'Pregunte por El Pollo',N'',N'6731479311',N'6741479311',N'PENDING','2016-10-25',N'',800,N'donante gonzalez');
 -- GO
+END
