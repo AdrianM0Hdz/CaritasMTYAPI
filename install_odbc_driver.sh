@@ -1,4 +1,6 @@
-if ! [[ "18.04 20.04 22.04 23.04" == *"$(lsb_release -rs)"* ]];
+#!/bin/bash
+
+if ![[ "18.04 20.04 22.04 23.04" == *"$(lsb_release -rs)"* ]];
 then
     echo "Ubuntu $(lsb_release -rs) is not currently supported.";
     exit;
@@ -18,5 +20,6 @@ export ACCEPT_EULA=Y
 apt-get install -y mssql-tools18
 echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
 . ~/.bashrc
+
 # optional: for unixODBC development headers
 apt-get install -y unixodbc-dev
