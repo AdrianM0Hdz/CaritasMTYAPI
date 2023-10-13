@@ -8,6 +8,10 @@ class TicketData:
     id: int
     uuid: str
     housing_reference: str
+    street: str
+    house_number: int
+    municipality: str
+    suburb: str
     receipt_comments: str
     reprogramation_comments: str
     house_phone_number: str
