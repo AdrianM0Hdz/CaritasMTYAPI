@@ -14,5 +14,6 @@ def deserialize_collector(collector_raw_data, tickets: List[TicketData]) -> Coll
         password=collector_raw_data[3],
         manager_id=collector_raw_data[4],
         fullname=collector_raw_data[5],
+        zone=collector_raw_data[6],
         tickets=tickets
     )

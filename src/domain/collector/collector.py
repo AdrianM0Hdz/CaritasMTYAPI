@@ -11,7 +11,8 @@ class Collector:
         username: str,
         password: str,
         fullname: str,
-        manager_id: str,
+        zone: str,
+        manager_id: int,
         tickets: List[str],
     ):
         assert isinstance(id, int)
@@ -19,7 +20,8 @@ class Collector:
         assert isinstance(username, str)
         assert isinstance(password, str)
         assert isinstance(fullname, str)
-        assert isinstance(manager_id, str)
+        assert isinstance(zone, str)
+        assert isinstance(manager_id, int)
         assert isinstance(tickets, list)
 
         self.id = id
@@ -27,6 +29,7 @@ class Collector:
         self.username = username
         self.password = password
         self.fullname = fullname
+        self.zone = fullname
         self.manager_id = manager_id
         self.tickets = tickets
 
@@ -37,13 +40,15 @@ class Collector:
         username: str,
         password: str,
         fullname: str,
-        manager_id: str,
+        zone: str,
+        manager_id: int,
     ):
         return cls(
             uuid=str(uuid1()),
             username=username,
             password=sha512(bytes(password, "utf-8")).hexdigest(),
             fullname=fullname,
+            zone=zone,
             manager_id=manager_id,
             tickets=[],
         )

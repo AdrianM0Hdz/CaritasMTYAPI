@@ -11,5 +11,6 @@ class CollectorData:
     username: str
     password: str
     fullname: str
+    zone: str
     manager_id: str
     tickets: List[TicketData]
