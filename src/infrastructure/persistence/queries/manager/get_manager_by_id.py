@@ -3,6 +3,7 @@ import os
 import pyodbc
 
 from src.application.read_model.manager import ManagerData
+from src.utils.execute_query import execute_query
 
 from src.infrastructure.persistence.queries.ticket.get_tickets_by_manager_id import get_tickets_by_manager_id
 from src.infrastructure.persistence.queries.collector.get_collectors_by_manager_id import get_collectors_by_manager_id
@@ -10,18 +11,10 @@ from src.infrastructure.persistence.queries.collector.get_collectors_by_manager_
 from src.infrastructure.persistence.queries.serializers.manager.deserialize_manager import deserialize_manager
 
 def get_manager_by_id(id: int) -> ManagerData:
-    connectionstring = f'DRIVER={os.environ["SQL_SERVER_DRIVER"]}; \
-                             SERVER={os.environ["SERVER"]}; \
-                             DATABASE={os.environ["DATABASE"]}; \
-                             UID={os.environ["USERNAME"]}; \
-                             PWD={os.environ["PASSWORD"]}'  
-    conn = pyodbc.connect(connectionstring)
-    cursor = conn.cursor()
-
-    query = f"SELECT * FROM Manager WHERE ID='{id}'"
-    cursor.execute(query)
+    query = f"SELECT * FROM Manager WHERE ID=?"
+    params = [id]
     
-    data = cursor.fetchall() 
+    data = execute_query(query, params)
     
     if len(data) == 0:
         raise BaseException("There's no manager with that ID")

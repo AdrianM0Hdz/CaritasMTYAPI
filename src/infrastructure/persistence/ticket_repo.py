@@ -26,27 +26,19 @@ class TicketRepository:
                              State, 
                              TicketDate, 
                              CollectorComments) 
-                     VALUES ('{item.uuid}', 
-                             '{item.manager_id}', 
-                             '{item.collector_id}', 
-                             '{item.housing_reference}', 
-                             '{item.street}',
-                             '{item.house_number}',
-                             '{item.municipality}',
-                             '{item.suburb}',
-                             '{item.receipt_comments}',
-                             '{item.reprogramation_comments}',
-                             '{item.house_phone_number}', 
-                             '{item.cellphone}',
-                             '{item.state.value}',
-                             '{str(item.date)}',
-                             '{item.collector_comments}');"""
-        execute_command(command)
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
+        
+        params = [item.uuid, item.manager_id, item.collector_id, item.housing_reference, item.street, \
+                  item.house_number, item.municipality, item.suburb, item.receipt_comments, \
+                  item.reprogramation_comments, item.house_phone_number, item.cellphone, item.state.value, \
+                  str(item.date), item.collector_comments]
+        execute_command(command, params)
         return item.id
 
     def get(self, id: int) -> Ticket:
-        query = f"SELECT * FROM Ticket WHERE ID='{id}'"
-        raw_data = execute_query(query)
+        query = f"SELECT * FROM Ticket WHERE ID=?"
+        params = [id]
+        raw_data = execute_query(query, params)
         if len(raw_data) > 1:
             raise Exception("more than one item fetched")
         if len(raw_data) == 0:
@@ -75,16 +67,20 @@ class TicketRepository:
 
     def commit(self, item: Ticket):
         command = f"""UPDATE Ticket SET
-                      ID='{item.id}', 
-                      ManagerID='{item.manager_id}', 
-                      CollectorID='{item.collector_id}', 
-                      HousingReference='{item.housing_reference}', 
-                      ReceiptComments='{item.receipt_comments}', 
-                      ReprogrammationComments='{item.reprogramation_comments}', 
-                      HousePhoneNumber='{item.house_phone_number}', 
-                      Cellphone='{item.cellphone}', 
-                      State='{item.state}', 
-                      TicketDate='{item.date}', 
-                      CollectorComments='{item.collector_comments}'
-                      WHERE ID='{item.id}';"""
-        execute_command(command)
+                      ID=?, 
+                      ManagerID=?, 
+                      CollectorID=?, 
+                      HousingReference=?, 
+                      ReceiptComments=?, 
+                      ReprogrammationComments=?, 
+                      HousePhoneNumber=?, 
+                      Cellphone=?, 
+                      State=?, 
+                      TicketDate=?, 
+                      CollectorComments=?
+                      WHERE ID=?;"""
+        
+        params = [item.id, item.manager_id, item.collector_id, item.housing_reference, \
+                  item.receipt_comments, item.reprogramation_comments, item.house_phone_number, \
+                  item.cellphone, item.state, item.date, item.collector_comments,item.id]
+        execute_command(command, params)

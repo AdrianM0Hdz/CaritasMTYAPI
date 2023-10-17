@@ -5,8 +5,13 @@ from src.utils.execute_command import execute_command
 def change_status(ticket_id: int, new_state: TicketState) -> None:
     """ Changes the status of ticket with uuid "ticket_id" to "new_state" 
     """
-    execute_command(f"""
-                    UPDATE Ticket
-                    SET State = '{new_state.value}'
-                    WHERE ID = {ticket_id};
-                    """)
+
+    command = f"""
+                UPDATE Ticket
+                SET State = ?
+                WHERE ID = ?;
+                """
+    
+    params = [new_state.value, ticket_id]
+
+    execute_command(command, params)

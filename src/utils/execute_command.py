@@ -2,7 +2,7 @@ import os
 
 import pyodbc
 
-def execute_command(query: str):
+def execute_command(query: str, params):
     connectionstring = f'DRIVER={os.environ["SQL_SERVER_DRIVER"]}; \
                          SERVER={os.environ["SERVER"]}; \
                          DATABASE={os.environ["DATABASE"]}; \
@@ -11,5 +11,5 @@ def execute_command(query: str):
      
     conn = pyodbc.connect(connectionstring)
     cursor = conn.cursor()
-    cursor.execute(query)
+    cursor.execute(query, params)
     conn.commit()

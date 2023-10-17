@@ -4,22 +4,16 @@ from typing import Tuple
 import pyodbc
 
 from src.application.read_model.ticket import TicketData
+from src.utils.execute_query import execute_query
 
 from src.infrastructure.persistence.queries.serializers.ticket.deserialize_ticket import deserialize_ticket
 
 def get_tickets_by_manager_id(manager_id: int) -> Tuple[TicketData]:
-    connectionstring = f'DRIVER={os.environ["SQL_SERVER_DRIVER"]}; \
-                             SERVER={os.environ["SERVER"]}; \
-                             DATABASE={os.environ["DATABASE"]}; \
-                             UID={os.environ["USERNAME"]}; \
-                             PWD={os.environ["PASSWORD"]}'  
-    conn = pyodbc.connect(connectionstring)
-    cursor = conn.cursor()
 
-    query = f"SELECT * FROM Ticket WHERE ManagerID='{manager_id}'"
-    cursor.execute(query)
+    query = f"SELECT * FROM Ticket WHERE ManagerID=?"
+    params = [manager_id]
     
-    data = cursor.fetchall() 
+    data = execute_query(query, params)
     
     tickets = tuple(map(deserialize_ticket, data))
     
