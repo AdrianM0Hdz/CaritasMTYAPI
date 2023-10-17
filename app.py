@@ -1,3 +1,4 @@
+import ssl
 import os
 import gunicorn
 from dotenv import load_dotenv
@@ -30,10 +31,8 @@ def add_header(r):
     r.headers["Content-Security-Policy"] = "default-src 'self'"
     return r
 
-API_CERT = 'C:/Users/jaime/OneDrive/Documentos/GitHub/ReposTec/CaritasMTYAPI/equipo04.tc2007b.tec.mx.cer'
-API_KEY = 'C:/Users/jaime/OneDrive/Documentos/GitHub/ReposTec/CaritasMTYAPI/equipo04.tc2007b.tec.mx.key'
-
-import ssl
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain(API_CERT, API_KEY)
-app.run(host='0.0.0.0', port=5000, ssl_context=context, debug=True)
+context.load_cert_chain(os.environ["API_CERT"], os.environ["API_KEY"])
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, ssl_context=context, debug=True)
