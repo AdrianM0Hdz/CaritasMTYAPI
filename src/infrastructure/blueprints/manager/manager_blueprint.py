@@ -19,7 +19,7 @@ def get_manager_by_id_handle(id: int):
         logger.info(f"MANAGER WITH ID: {id} FETCHED BY {request.remote_addr}")
         return jsonify(**manager_json)
     except BaseException as inst:
-        logger.critical(f"FAILED TO FETCH MANAGER WITH ID: {id} BY {request.remote_addr}")
+        logger.critical(f"FAILED TO FETCH MANAGER WITH ID: {id} BY {request.remote_addr}", exc_info=True)
         return jsonify(msg="ERROR"),400
 
 @manager_blueprint.route("/login", methods=["POST"])
