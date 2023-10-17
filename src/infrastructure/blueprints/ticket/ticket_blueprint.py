@@ -17,7 +17,7 @@ from src.infrastructure.persistence.commands.change_collector_comments import ch
 ticket_blueprint = Blueprint("ticket_blueprint", __name__)
 
 @ticket_blueprint.route("/<string:id>", methods=["GET"])
-def get_ticket_by_id_handler(uuid: str):
+def get_ticket_by_id_handler(id: str):
     return jsonify()
 
 @ticket_blueprint.route("/collector-tickets/<int:collector_id>", methods=["GET"])
