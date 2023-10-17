@@ -9,14 +9,6 @@ from src.infrastructure.create_app import create_app
 import pyodbc 
 print(pyodbc.drivers())
 
-# # Remove 'Server' from header
-# from gunicorn.http import wsgi
-# class Response(wsgi.Response):
-#     def default_headers(self, *args, **kwargs):
-#         headers = super(Response, self).default_headers(*args, **kwargs)
-#         return [h for h in headers if not h.startswith('Server:')]
-# wsgi.Response = Response
-
 app = create_app()
 
 @app.after_request
@@ -24,7 +16,7 @@ def add_header(r):
     import secure
     secure_headers = secure.Secure()
     secure_headers.framework.flask(r)
-    #r.headers['X-Frame-Options'] = 'SAMEORIGIN' # ya lo llena 'secure'
+    r.headers['X-Frame-Options'] = 'SAMEORIGIN' # ya lo llena 'secure'
     r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     r.headers["Content-Security-Policy"] = "default-src 'none'"
     r.headers["Content-Type"] = "application/json"

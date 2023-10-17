@@ -51,7 +51,7 @@ def login_handle():
             logger.info(f"MANAGER WITH ID: {manager.id} WAS LOGGED IN BY {request.remote_addr}")
             return jsonify(id=manager.id, role="MANAGER")
         else:
-            logger.info(f"COLLECTOR WITH ID: {manager.id} WAS LOGGED IN BY {request.remote_addr}")
+            logger.info(f"COLLECTOR WITH ID: {collector.id} WAS LOGGED IN BY {request.remote_addr}")
             return jsonify(id=collector.id, role="COLLECTOR")
         
     except BaseException as inst:

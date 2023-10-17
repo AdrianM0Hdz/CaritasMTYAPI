@@ -1,2 +1,2 @@
 #!/bin/bash
-python -m gunicorn.app.wsgiapp -b 0.0.0.0:5000 -w 1 --certfile equipo04.tc2007b.tec.mx.cer --keyfile equipo04.tc2007b.tec.mx.key app:app > /dev/null &
+python -m gunicorn.app.wsgiapp -b 0.0.0.0:10203 -w 1 --certfile equipo04.tc2007b.tec.mx.cer --keyfile equipo04.tc2007b.tec.mx.key app:app > /dev/null &

@@ -11,12 +11,12 @@ curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list |
 apt-get update 
 
 export ACCEPT_EULA=Y 
-apt-get install -y msodbcsql18
+apt-get install -y msodbcsql17
 
 # optional: for bcp and sqlcmd
 export ACCEPT_EULA=Y 
-apt-get install -y mssql-tools18
-echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
+apt-get install -y mssql-tools17
+echo 'export PATH="$PATH:/opt/mssql-tools17/bin"' >> ~/.bashrc
 . ~/.bashrc
 # optional: for unixODBC development headers
 apt-get install -y unixodbc-dev
