@@ -61,4 +61,5 @@ def login_collector_handle():
         logger.info(f"CORRECTLY LOGGED COLLECTOR {username} BY {request.remote_addr}")
         return jsonify(id=collector_json["id"])
     except BaseException as inst:
+        logger.critical(f"FAILED TO LOG-IN COLLECTOR WITH {username} BY {request.remote_addr}", exc_info=True)
         return jsonify(msg=str(inst)), 500
