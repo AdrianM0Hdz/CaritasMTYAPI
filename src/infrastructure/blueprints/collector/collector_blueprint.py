@@ -21,18 +21,24 @@ def get_collector_by_id_handle(id: int):
         return jsonify(**collector_json)
     except BaseException as inst:
         logger.critical(f"FAILED TO FETCH COLLECTOR WITH ID {id} BY {request.remote_addr}", exc_info=True)
-        return jsonify(msg="invalid parameters"), 500
+        return jsonify(msg="error"), 500
 
 @collector_blueprint.route("/get_by_manager_id/<int:manager_id>", methods=["GET"]) 
 def get_collectors_by_manager_id_handle(manager_id: int):
-    collectors: tuple[CollectorData] = get_collectors_by_manager_id(manager_id=manager_id)
-    collectors_json: list[dict] = list(map(serialize_collector_to_json, collectors))
-    return jsonify(collectors=collectors_json)
+    try:
+        collectors: tuple[CollectorData] = get_collectors_by_manager_id(manager_id=manager_id)
+        collectors_json: list[dict] = list(map(serialize_collector_to_json, collectors))
+        logger.info(f"COLLECTOR FETCHED BY MANAGER ID: {manager_id} BY: {request.remote_addr}")
+        return jsonify(collectors=collectors_json)
+    except BaseException as inst:
+        logger.critical(f"FAILED TO FECTH COLLECTOR BY MANAGER ID: {manager_id} BY {request.remote_addr}", exc_info=True)
+        return jsonify(msg="error"), 500
 
 @collector_blueprint.route("/login", methods=["POST"])
 def login_collector_handle():
     data = request.get_json()
     if not data:
+        logger.error(f"NO REQUEST BODY GIVEN BY {request.remote_addr} TO LOGIN COLLECTOR")
         print("no json body")
         return jsonify(
             msg="just must give username and password"
@@ -44,13 +50,16 @@ def login_collector_handle():
         username=data["username"]
         password=data["password"]
     except KeyError:
+        logger.error(f"INVALID LOGIN COLLECTOR PARAMETERS GIVEN BY {request.remote_addr}")
         return jsonify(
             msg="username and password parameters must be given"
         ), 400
-    print("passed check")
+
     try:
         collector: CollectorData  = login_collector(username=username, password=password)
         collector_json = serialize_collector_to_json(collector)
+        logger.info(f"CORRECTLY LOGGED COLLECTOR {username} BY {request.remote_addr}")
         return jsonify(id=collector_json["id"])
     except BaseException as inst:
-        return jsonify(msg=str(inst)), 400
+        logger.critical(f"FAILED TO LOG-IN COLLECTOR WITH {username} BY {request.remote_addr}", exc_info=True)
+        return jsonify(msg=str(inst)), 500
