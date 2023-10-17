@@ -26,6 +26,8 @@ def add_header(r):
     #r.headers['X-Frame-Options'] = 'SAMEORIGIN' # ya lo llena 'secure'
     r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     r.headers["Content-Security-Policy"] = "default-src 'none'"
+    r.headers["Content-Type"] = "application/json"
+    r.headers["Content-Security-Policy"] = "default-src 'self'"
     return r
 
 API_CERT = 'C:/Users/jaime/OneDrive/Documentos/GitHub/ReposTec/CaritasMTYAPI/equipo04.tc2007b.tec.mx.cer'
