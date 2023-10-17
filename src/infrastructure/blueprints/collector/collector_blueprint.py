@@ -1,5 +1,7 @@
 from flask import Blueprint, request, jsonify
 
+from src.utils.logger import logger
+
 from src.application.read_model.collector import CollectorData
 from src.application.queries.collector import login_collector
 
@@ -11,14 +13,19 @@ collector_blueprint = Blueprint('collector_blueprint', __name__)
 
 @collector_blueprint.route("/<int:id>", methods=["GET"])
 def get_collector_by_id_handle(id: int):
-    assert isinstance(id, int)
-    collector: CollectorData = get_collector_by_id(id=id)
-    collector_json: dict = serialize_collector_to_json(collector)
-    return jsonify(**collector_json)
+    try: 
+        assert isinstance(id, int)
+        collector: CollectorData = get_collector_by_id(id=id)
+        collector_json: dict = serialize_collector_to_json(collector)
+        logger.info(f"COLLECTOR WITH ID {id} FETCHED BY {request.remote_addr}")
+        return jsonify(**collector_json)
+    except BaseException as inst:
+        logger.critical(f"FAILED TO FETCH COLLECTOR WITH ID {id} BY {request.remote_addr}", exc_info=True)
+        return jsonify(msg="invalid parameters"), 500
 
 @collector_blueprint.route("/get_by_manager_id/<int:manager_id>", methods=["GET"]) 
 def get_collectors_by_manager_id_handle(manager_id: int):
-    collectors: list[CollectorData] = get_collectors_by_manager_id(manager_id=manager_id)
+    collectors: tuple[CollectorData] = get_collectors_by_manager_id(manager_id=manager_id)
     collectors_json: list[dict] = list(map(serialize_collector_to_json, collectors))
     return jsonify(collectors=collectors_json)
 
